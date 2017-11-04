@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <form action="">
+            <label>姓名：<input type="text" v-model="username" ></label>
+            <label></label>
+            <label></label>
+            <div>姓名：{{username}}</div>
+        </form>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                username:''
+            }
+        })
+    </script>
+</body>
+</html>
