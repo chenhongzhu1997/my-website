@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        li{
+            list-style:none;
+            height:40px;
+            width:500px;
+            margin-bottom:10px;
+            background:#ccc;
+        }
+        ul{
+            height:300px;
+            width:500px;
+        }
+        .left{
+            float:left;
+        }
+        .right{
+            float:right;
+        }
+        span{
+            margin:10px 0;  
+        }
+        .red{
+            background:#f00;
+        }
+        .delect{
+            float:left;
+            color:#fff;
+        }
+        input[type='checkbox']{
+            float:left;
+            margin-top:15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <label>名称: <input type="text" placeholder="请输入名称" v-model="name"></label>
+        <label>价格: <input type="text" v-model="price"></label>
+        <button @click="add()">增加</button>
+        <div>
+            <input type="text" v-model='keyword'>
+            <button @click="search">筛选</button>
+        </div>
+        <ul>
+            <li v-for="(item,index) in users" :class='{red:item.isRed}' @click="changRed(item)" >
+                <input type="checkbox" @click.stop='' v-model='checked' :value='index'>
+                <span class="delect" @click.stop='del(index)'>[x]</span>
+                <span class="left">{{item.name}}</span>
+                <span class="right">{{item.number}}</span>
+            </li>
+        </ul>
+        <div>总数是:{{num()}}</div>
+       <button @click='delAll'>删除选中</button>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                name:'',
+                price:0,
+                checked:[],
+                keyword:'',
+              users:[
+                  {  
+                      name:"衣服",
+                      number:123,
+                     isRed:false
+                  },{
+                      name:'裤子',
+                      number:12,
+                      isRed:false
+                      
+                  },{
+                      name:'鞋',
+                      number:33,
+                      isRed:false
+                      
+                  },{
+                      name:'iphone',
+                      number:234,
+                      isRed:false
+                     
+                  },{
+                      name:'iphoneX',
+                      number:543,
+                      isRed:false
+                      
+                  }
+              ]
+                    
+                
+            },
+            methods:{
+                changRed(product){
+                   product.isRed=!product.isRed;
+                },
+                num(){
+                   let num=0;
+                   this.users.forEach(function(val,index){
+                    if(val.isRed)
+                    {
+                        num+=parseInt(val.number);
+                    }
+                    
+                   });
+                   return num;
+                },
+                add(){
+                    this.users.push({
+                        name:this.name,
+                        number:this.price,
+                        isRed:false
+                    });
+                    this.name='';
+                    this.price=0;
+                },
+                del(index){
+                    this.users.splice(index,1);
+                },
+                delAll(){
+                   
+                    let arr=this.users.filter((val,index)=>{
+                        if(!this.checked.includes(index)){
+                            return val;
+                        }
+                    });
+                    this.users=arr;
+                    this.checked=[];
+                },
+                search(){
+                    let arr=this.users.filter((val,index)=>{
+                        if(val.name.includes(this.keyword)){
+                            return val;
+                        }
+                    });
+                    this.users=arr;
+                    this.keyword='';
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>
