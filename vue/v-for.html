@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(school,index) in list">
+                {{school}}~~ {{index}}
+            </li>
+            <li v-for="item in sortArr">
+                    {{item}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(val,key,index) in obj">
+                {{val}}  {{key}}   {{index}}
+            </li>
+        </ul>
+        <ul>
+            <li v-for="(index,key) in sortUsers">
+                    {{key}} {{index}}  
+            </li>
+        </ul>
+        <ul>
+            <li v-for="user in sortUsers">
+                {{user.name}}   {{user.age}}
+            </li>
+        </ul>
+        <!-- <ul>
+            <li v-for="item in arr">
+                {{item}}
+            </li>
+        </ul> -->
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        var vm=new Vue({
+            el:'#app',
+            data:{
+                list:['农大','理工','林大','黑大'],
+                arr:[2,1,4,6,3],
+                obj:{
+                    name:"zhangsan",
+                    age:18,
+                    school:"林大"
+                },
+                users:[{
+                    name:"zhangsan",
+                    age:18,
+                    school:"黑大"
+                },{
+                    name:"lisi",
+                    age:19,
+                    school:"林大"
+                },{ 
+                    name:"honghong",
+                    age:20,
+                    school:"农大"
+                }]
+            },
+            computed:{
+                sortArr:function(){
+                 return  this.arr.sort(function(a,b){
+                        return a-b;
+                    });
+                },
+                sortUsers(){
+                 return   this.users.sort(function(a,b){
+                        return b.age-a.age;
+                      });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
