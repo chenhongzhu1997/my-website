@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        ul{
+            list-style:none;
+        }
+        #container{
+            height:300px;
+            width:300px;
+            position:relative;
+            margin:200px auto;
+        }
+        #imgs img{
+            height:300px;
+            width:300px;
+        }
+        .item{
+            position:absolute;
+            top:0;
+            left:0;
+        }
+        #tabs{
+            position:absolute;
+            bottom:10px;
+            right:10px;
+
+        }
+        #tabs li{
+            height:20px;
+            width:20px;
+            margin-right:5px;
+            background:#000;
+            color:#fff;
+            float:left;
+            cursor:pointer;
+            text-align:center;
+            line-height:20px;
+        }
+        #tabs .selected{
+            background-color:chocolate;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" @mouseover='stop'  @mouseleave='start'>
+        <ul id='imgs'>
+            <li v-for='(item,index) in imgs'  v-show="index==nowIndex" class='item'>
+                <img :src="item" >
+            </li>
+        </ul>
+        <ul id='tabs'>
+            <li v-for='(item,index) in imgs.length' :class="{selected:index==nowIndex}"  @mouseover='changImg(index)'>
+                {{item}}
+            </li>
+        </ul>
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        new Vue({
+            el:'#container',
+            data:{
+                imgs:['https://img3.doubanio.com/lpic/s24468373.jpg',
+                    'https://img3.doubanio.com/lpic/s6989253.jpg',
+                    'https://img3.doubanio.com/lpic/s27102925.jpg'],
+                nowIndex:0,
+                timer:null
+            },
+            mounted(){
+                this.play();
+            },
+            methods:{
+                stop(){
+                    clearInterval(this.timer);
+                },
+                start(){
+                  this.play();
+                },
+                play(){
+                    this.timer=setInterval(()=>{
+                       this.nowIndex++;
+                       if(this.nowIndex==this.imgs.length)
+                        {
+                            this.nowIndex=0;
+                        }
+                  },1000);
+                },
+                changImg(index){
+                    this.nowIndex=index;
+                }
+    
+
+
+            }
+        });
+
+
+    </script>
+</body>
+</html>
