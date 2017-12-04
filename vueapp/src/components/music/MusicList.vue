@@ -17,7 +17,9 @@ export default {
     };
   },
   mounted() {
-    Axios.get("/static/data/musiclist.json").then(res => {
+    let url1='/static/data/musiclist.json';  
+    Axios.get(url1).then(res => {
+      console.log(res);
       this.musicList = res.data.albums;
     });
   }

@@ -9,6 +9,9 @@ import Book from '@/components/book/Book'
 import Photo from '@/components/photo/Photo'
 import MusicList from '@/components/music/MusicList'
 import MusicAlbums from '@/components/music/MusicAlbums'
+import PhotoList from '@/components/photo/PhotoList'
+import PhotoDetail from '@/components/photo/PhotoDetail'
+
 Vue.use(Router)
 
 export default new Router({
@@ -40,7 +43,16 @@ export default new Router({
      component:Book
    },{
      path:'/photo',
-     component:Photo
+     component:Photo,
+     redirect:'/photo/photoList',
+     children:[{
+      path:'photoList',
+      component:PhotoList
+     },{
+       path:'photoDetail/:index',
+       component:PhotoDetail
+
+     }]
    }
 
 
