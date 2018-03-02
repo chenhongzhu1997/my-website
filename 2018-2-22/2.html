@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Person(name){
+            this.name=name;
+        }
+        Person.prototype.sayHello=function(){
+            console.log('my name is'+' '+this.name);
+        }
+        var person1=new Person('zhangsan');
+        person1.sayHello();
+        console.log(Person.prototype);
+    //原型使用来继承的，每次new实例对象的时候，对象下就会有原型下的所有东西
+    //原型链 去构造函数里找，去构造函数的原型中找，父类中找。一直找到object
+    //console.log(Person.prototype);
+    //constructor 返回的是构造函数
+    //instanceof 
+    console.log(arr instanceof array);
+    //数组的构造函数一定是数组
+    </script>
+</body>
+</html>
